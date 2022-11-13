@@ -4,9 +4,21 @@
 #include<stdlib.h>
 #include<string.h>
 
+void shell_Header()
+{
+    printf("*****************************************************\n\n");
+
+
+    printf("**************** Welcome to my Shell ****************\n\n");
+
+
+    printf("*****************************************************\n\n");
+
+}
+
 void pwd()
 {
-    char s[100];
+    char s[1000];
     printf("%s\n", getcwd(s, 1000));
     // printf("Path printed");
 }
@@ -29,19 +41,39 @@ void echo()
     
 }
 
+char **diffrentiator(char *input)
+{
+    char **command = malloc(8*sizeof(char *));
+    char *separator = " ";
+    char *parsed;
+    int index = 0;
+
+
+    parsed = strtok(input,separator);
+    while (parsed!=NULL)
+    {
+        command[index] = parsed;
+        index++;
+
+        parsed = strtok(NULL,separator);
+    }
+
+    command[index]  = NULL;
+    return command;
+    
+}
+
+void menu(char a[])
+{
+
+}
+
 int main()
 {
-   
-    printf("*****************************************************\n\n");
-
-
-    printf("***************** Nishchhal's Shell *****************\n\n");
-
-
-    printf("*****************************************************\n\n");
+ shell_Header();  
     while (1)
     {
-        printf("Nishchhal's Shell # : ");
+        printf("nishchhal007@NishchhalMSI:~$");
         
         char a[200];
         gets(a);
@@ -61,6 +93,13 @@ int main()
                 printf("Demo : Enter the Echo  command in the format echo \"The statement which u want to print \"  \n");
                 echo();
             }
+            else
+            {
+                char **cmd;
+               cmd =  diffrentiator(a);
+               printf("%s %s",cmd[0],cmd[1]);
+            }
+            
             printf("\n");
             
     }
